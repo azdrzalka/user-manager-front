@@ -20,14 +20,19 @@ export class HomeComponent implements OnInit {
 
   constructor(private userService: UserService, public dialog: MatDialog) { }
 
-  ngOnInit() {
+  ngOnInit() : void {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
     this.loadData();
   }
 
-  loadData() {
-    this.userService.getUser().subscribe(result => this.dataSource.data = result);
+  loadData() : void {
+    this.userService.getUsers().subscribe(result => this.dataSource.data = result);
+  }
+
+  addUserToList(user: User) : void {
+    this.dataSource.data.push(user);
+    this.dataSource.data = this.dataSource.data.slice();
   }
 
   doFilter = (value: string) => {
@@ -52,7 +57,7 @@ export class HomeComponent implements OnInit {
       }
     });
 
-    dialogRef.afterClosed().subscribe(() => this.loadData());
+    dialogRef.afterClosed().subscribe((result) => this.addUserToList(result));
   }
 
   openUserForm(user: User): void {

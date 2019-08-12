@@ -40,7 +40,7 @@ export class UserFormComponent {
   updateUser() {
     if (this.data.isNewUser) {
       this.data.user.registrationDate = new Date();
-      this.userService.add(this.data.user).subscribe(() => this.thisDialogRef.close());
+      this.userService.add(this.data.user).subscribe((result) => this.thisDialogRef.close(result));
     } else {
       this.userService.update(this.data.user).subscribe(() => this.thisDialogRef.close());
     }
