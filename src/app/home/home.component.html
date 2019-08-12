@@ -1,0 +1,54 @@
+<button class="add-user-button" mat-raised-button (click)="openUserFormToAddNew()" color="primary">
+    Add user
+</button>
+<mat-form-field>
+    <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Filter">
+</mat-form-field>
+<mat-table [dataSource]="dataSource" matSort class="mat-elevation-z1">
+    <ng-container matColumnDef="username">
+        <mat-header-cell mat-sort-header *matHeaderCellDef> Username </mat-header-cell>
+        <mat-cell *matCellDef="let user"> {{user.username}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="name">
+        <mat-header-cell mat-sort-header *matHeaderCellDef> Name </mat-header-cell>
+        <mat-cell *matCellDef="let user"> {{user.name}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="surname">
+        <mat-header-cell mat-sort-header *matHeaderCellDef> Surname </mat-header-cell>
+        <mat-cell *matCellDef="let user"> {{user.surname}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="email">
+        <mat-header-cell mat-sort-header *matHeaderCellDef> E-Mail </mat-header-cell>
+        <mat-cell *matCellDef="let user"> {{user.email}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="role">
+        <mat-header-cell mat-sort-header *matHeaderCellDef> Role </mat-header-cell>
+        <mat-cell *matCellDef="let user"> {{user.role}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="registrationDate">
+        <mat-header-cell mat-sort-header *matHeaderCellDef> Registration Date </mat-header-cell>
+        <mat-cell *matCellDef="let user"> {{user.registrationDate}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="enabled">
+        <mat-header-cell mat-sort-header *matHeaderCellDef> Enabled </mat-header-cell>
+        <mat-cell *matCellDef="let user"> {{user.enabled}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+        <mat-cell *matCellDef="let user">
+            <button mat-icon-button color="accent" aria-label="Example icon-button with a pencil icon"
+                (click)="openUserForm(user)">
+                <mat-icon>edit</mat-icon>
+            </button>
+            <button [disabled]="isLastUser()" mat-icon-button color="accent" aria-label="Example icon-button with a delete icon"
+                (click)="openDeleteModal(user)">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+</mat-table>
+<mat-paginator [pageSize]="10" [pageSizeOptions]="[2, 4, 6, 10, 20]">
+</mat-paginator>

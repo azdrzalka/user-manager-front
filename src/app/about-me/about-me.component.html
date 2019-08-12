@@ -1,0 +1,26 @@
+<div>
+    <div class="about-me about-me-profile">
+        <div class="about-me-avatar">
+            <div class="circular--landscape">
+                <img class="img" src="../assets/me.jpg" />
+            </div>
+        </div>
+        <div class="about-me-body">
+            <h6 class="about-me-category text-gray">FULL STACK JAVA DEVELOPER</h6>
+            <h4 class="about-me-title">Adam Zdrzałka</h4>
+            <p class="about-me-description">
+                Ambitious Full stack Java developer with a large technological stack which results from my passion for
+                technology. In the picture you can see me enjoying the victory at the biggest hackathon in the world.
+                I enjoyed this task. You can download my resume below.
+
+            </p>
+            <button class="jump" mat-icon-button color="accent" (click)="onClick()" aria-label="Example icon-button with a delete icon">
+            <mat-icon>cloud_download</mat-icon>
+            </button>
+            <app-skill-bar [label]="'Java'" [color]="'accent'" [value]="70"></app-skill-bar>
+            <app-skill-bar [label]="'Javascript'" [color]="'primary'" [value]="30"></app-skill-bar>
+            <app-skill-bar [label]="'Angular'" [color]="'accent'" [value]="50"></app-skill-bar>
+            <app-skill-bar [label]="'Spring'" [color]="'primary'" [value]="60"></app-skill-bar>
+        </div>
+    </div>
+</div>
