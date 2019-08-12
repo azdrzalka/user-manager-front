@@ -4,11 +4,12 @@
     <p>
         <mat-form-field appearance="standard">
             <mat-label>Username</mat-label>
-            <input [formControl]="usernameFormControl" matInput placeholder="Placeholder" [(ngModel)]="data.user.username">
+            <input [formControl]="usernameFormControl" matInput placeholder="Placeholder"
+                [(ngModel)]="data.user.username">
             <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
             <mat-hint>Errors appear instantly!</mat-hint>
             <mat-error *ngIf="usernameFormControl.invalid">
-              Email is <strong>required</strong>
+                Username is <strong>required</strong>
             </mat-error>
         </mat-form-field>
     </p>
@@ -16,22 +17,22 @@
     <p>
         <mat-form-field appearance="standard">
             <mat-label>Name</mat-label>
-            <input [formControl]="formControl" matInput placeholder="Placeholder" [(ngModel)]="data.user.name">
+            <input [formControl]="nameControl" matInput placeholder="Placeholder" [(ngModel)]="data.user.name">
             <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
             <mat-hint>Errors appear instantly!</mat-hint>
-            <mat-error *ngIf="formControl.invalid">
-              Email is <strong>required</strong></mat-error>
+            <mat-error *ngIf="nameControl.invalid">
+                Name is <strong>required</strong></mat-error>
         </mat-form-field>
     </p>
 
     <p>
         <mat-form-field appearance="standard">
             <mat-label>Surname</mat-label>
-            <input [formControl]="formControl" matInput placeholder="Placeholder" [(ngModel)]="data.user.surname">
+            <input [formControl]="surnameControl" matInput placeholder="Placeholder" [(ngModel)]="data.user.surname">
             <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
             <mat-hint>Errors appear instantly!</mat-hint>
-            <mat-error *ngIf="formControl.invalid">
-              Email is <strong>required</strong></mat-error>
+            <mat-error *ngIf="surnameControl.invalid">
+                Surname is <strong>required</strong></mat-error>
         </mat-form-field>
     </p>
 
@@ -42,22 +43,38 @@
             <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
             <mat-hint>Errors appear instantly!</mat-hint>
             <mat-error *ngIf="emailFormControl.invalid">
-              Email is <strong>required</strong></mat-error>
+                Email is <strong>required</strong></mat-error>
         </mat-form-field>
     </p>
 
     <p>
         <mat-form-field>
             <mat-label>Select an option</mat-label>
-            <mat-select [(value)]="data.user.role">
-                <mat-option *ngFor="let role of roles" [(value)]="role">{{ role }}</mat-option>
+            <mat-select [(ngModel)]="data.user.role" [formControl]="roleControl" required>
+                <mat-option *ngFor="let role of roles" [(value)]="role">
+                    {{role}}
+                </mat-option>
             </mat-select>
+            <mat-error *ngIf="roleControl.invalid">
+                Role is <strong>required</strong></mat-error>
         </mat-form-field>
+    </p>
 
+    <p>
+        <mat-form-field>
+            <mat-label>Select an option</mat-label>
+            <mat-select [(ngModel)]="data.user.enabled" [formControl]="enabledControl" required>
+                <mat-option required *ngFor="let enableOption of enableOptions" [(value)]="enableOption">
+                    {{ enableOption }}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="enabledControl.invalid">
+                Enable is <strong>required</strong></mat-error>
+        </mat-form-field>
     </p>
 
 </mat-dialog-content>
 <mat-dialog-actions align="end">
     <button mat-button mat-dialog-close>Cancel</button>
-    <button mat-button [mat-dialog-close]="true" [disabled]="formGroup.invalid" (click)="updateUser()" cdkFocusInitial>Save</button>
+    <button mat-button [mat-dialog-close]="true" [disabled]="formGroup.invalid" (click)="updateUser()"
+        cdkFocusInitial>Save</button>
 </mat-dialog-actions>

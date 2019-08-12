@@ -14,7 +14,7 @@ import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
 export class HomeComponent implements OnInit {
 
   dataSource = new MatTableDataSource<User>();
-  displayedColumns = ['username', 'name', 'surname', 'email', 'role', 'registrationDate', 'actions'];
+  displayedColumns = ['username', 'name', 'surname', 'email', 'role', 'registrationDate', 'enabled', 'actions'];
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
