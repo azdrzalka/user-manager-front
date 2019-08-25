@@ -15,19 +15,19 @@ export class UserFormComponent {
   roles: Array<string> = [];
   selected: string = '';
 
-  usernameFormControl = new FormControl({value: '', disabled: !this.data.isNewUser}, Validators.required);
-  nameControl = new FormControl('', Validators.required);
-  surnameControl = new FormControl('', Validators.required);
-  enabledControl = new FormControl('', Validators.required);
-  roleControl = new FormControl('', Validators.required);
-  emailFormControl = new FormControl('', [Validators.required, Validators.email]);
+  usernameFormControl = new FormControl({value: this.data.user.username, disabled: !this.data.isNewUser}, Validators.required);
+  nameControl = new FormControl(this.data.user.name, Validators.required);
+  surnameControl = new FormControl(this.data.user.surname, Validators.required);
+  enabledControl = new FormControl(this.data.user.enabled, Validators.required);
+  roleControl = new FormControl(this.data.user.role, Validators.required);
+  emailFormControl = new FormControl(this.data.user.email, [Validators.required, Validators.email]);
   formGroup: FormGroup = new FormGroup({
-    usernameFormControl: this.usernameFormControl,
-    nameControl: this.nameControl,
-    surnameControl: this.surnameControl,
-    roleControl: this.roleControl,
-    enabledControl: this.enabledControl,
-    emailFormControl: this.emailFormControl
+    username: this.usernameFormControl,
+    name: this.nameControl,
+    surname: this.surnameControl,
+    role: this.roleControl,
+    enabled: this.enabledControl,
+    email: this.emailFormControl
   });
 
   constructor(@Optional() @Inject(MAT_DIALOG_DATA) public data: any, private userService: UserService, public thisDialogRef: MatDialogRef<UserFormComponent>,private _fb: FormBuilder) {
@@ -39,6 +39,7 @@ export class UserFormComponent {
 
   updateUser() {
     if (this.data.isNewUser) {
+      this.data.user = this.formGroup.value;
       this.data.user.registrationDate = new Date();
       this.userService.add(this.data.user).subscribe((result) => this.thisDialogRef.close(result));
     } else {
